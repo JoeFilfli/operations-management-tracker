@@ -51,7 +51,7 @@ export default function EquipmentDetail() {
   if (!eq) return <p className="p-8 text-gray-400">Loading…</p>
 
   return (
-    <div className="p-8 max-w-3xl">
+    <div className="p-4 sm:p-8 max-w-3xl">
       <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
         <Link to="/equipment" className="hover:text-brand-600">Equipment</Link>
         <span>/</span>
@@ -97,7 +97,7 @@ export default function EquipmentDetail() {
           </div>
         </form>
       ) : (
-        <div className="card p-5 mb-6 grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
+        <div className="card p-5 mb-6 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
           <div><span className="text-gray-500">Status</span><div className="mt-1"><StatusBadge value={eq.status} type="equipment" /></div></div>
           <div><span className="text-gray-500">Location</span><div className="mt-1 font-medium">{eq.location?.name ?? '—'}</div></div>
           <div><span className="text-gray-500">Manufacturer</span><div className="mt-1 font-medium">{eq.manufacturer || '—'}</div></div>
@@ -112,7 +112,8 @@ export default function EquipmentDetail() {
         {tickets.length === 0 ? (
           <p className="px-4 py-3 text-sm text-gray-400">No tickets.</p>
         ) : (
-          <table className="w-full text-sm">
+          <div className="overflow-x-auto">
+        <table className="w-full text-sm">
             <thead className="bg-gray-50 text-gray-500 text-xs uppercase border-b border-gray-200">
               <tr>
                 <th scope="col" className="px-4 py-2 text-left">ID</th>
@@ -132,6 +133,7 @@ export default function EquipmentDetail() {
               ))}
             </tbody>
           </table>
+        </div>
         )}
       </div>
     </div>

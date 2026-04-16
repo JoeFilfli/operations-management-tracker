@@ -32,7 +32,7 @@ export default function Dashboard() {
   )
 
   return (
-    <div className="p-8 max-w-6xl">
+    <div className="p-4 sm:p-8 max-w-6xl">
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Dashboard</h1>
 
       <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Equipment</h2>
@@ -51,6 +51,7 @@ export default function Dashboard() {
 
       <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Open Tickets</h2>
       <div className="card overflow-hidden">
+        <div className="overflow-x-auto">
         <table className="w-full text-sm" aria-label="Open tickets" aria-busy={loading}>
           <thead className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide border-b border-gray-200">
             <tr>
@@ -86,6 +87,7 @@ export default function Dashboard() {
             )}
           </tbody>
         </table>
+        </div>
         {!loading && (
           <div className="px-4 py-2 border-t border-gray-100 text-right">
             <Link to="/tickets" className="text-sm text-brand-600 hover:underline">View all tickets →</Link>

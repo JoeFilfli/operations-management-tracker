@@ -58,7 +58,7 @@ export default function Users() {
   }
 
   return (
-    <div className="p-8 max-w-5xl">
+    <div className="p-4 sm:p-8 max-w-5xl">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Users</h1>
         <button className="btn-primary" onClick={openCreate}>+ Add user</button>
@@ -74,6 +74,7 @@ export default function Users() {
         {loading ? <p className="px-5 py-4 text-sm text-gray-400">Loading…</p>
           : items.length === 0 ? <EmptyState icon="👤" title="No users found" message="Try a different search, or add a new user." action={<button className="btn-primary" onClick={openCreate}>+ Add user</button>} />
           : (
+          <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide border-b border-gray-200">
               <tr>
@@ -102,6 +103,7 @@ export default function Users() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
         <div className="px-4"><Pagination page={page} pages={pages} total={total} onPage={setPage} /></div>
       </div>

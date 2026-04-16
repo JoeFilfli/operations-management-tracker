@@ -52,7 +52,7 @@ export default function Locations() {
   }
 
   return (
-    <div className="p-8 max-w-4xl">
+    <div className="p-4 sm:p-8 max-w-4xl">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Locations</h1>
         {canWrite && <button className="btn-primary" onClick={openCreate}>+ Add location</button>}
@@ -68,6 +68,7 @@ export default function Locations() {
         {loading ? <p className="px-5 py-4 text-sm text-gray-400">Loading…</p>
           : items.length === 0 ? <EmptyState icon="📍" title="No locations found" message="Try a different search, or add a new location." action={canWrite && <button className="btn-primary" onClick={openCreate}>+ Add location</button>} />
           : (
+          <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide border-b border-gray-200">
               <tr>
@@ -91,6 +92,7 @@ export default function Locations() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
         <div className="px-4"><Pagination page={page} pages={pages} total={total} onPage={setPage} /></div>
       </div>

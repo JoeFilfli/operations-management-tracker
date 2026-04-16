@@ -62,7 +62,7 @@ export default function TicketDetail() {
   const unassigned = users.filter((u) => !assignedIds.has(u.id))
 
   return (
-    <div className="p-8 max-w-3xl">
+    <div className="p-4 sm:p-8 max-w-3xl">
       <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
         <Link to="/tickets" className="hover:text-brand-600">Tickets</Link>
         <span>/</span>
@@ -78,7 +78,7 @@ export default function TicketDetail() {
 
       {saveError && <div className="mb-4"><ErrorMessage error={saveError} /></div>}
 
-      <div className="card p-5 mb-6 grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
+      <div className="card p-5 mb-6 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm">
         <div>
           <span className="text-gray-500 block mb-1">Status</span>
           <select

@@ -52,32 +52,32 @@ export default function ActivityLog() {
   const clearFilters = () => { setEntityType(''); setAction(''); setSince(''); setUntil(''); setPage(1) }
 
   return (
-    <div className="p-8 max-w-5xl">
+    <div className="p-4 sm:p-8 max-w-5xl">
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Activity Log</h1>
 
       <div className="flex flex-wrap gap-3 mb-4 items-end">
         <div>
           <label className="label" htmlFor="al-type">Entity type</label>
-          <select id="al-type" className="input w-52" value={entityType}
+          <select id="al-type" className="input w-full sm:w-52" value={entityType}
             onChange={(e) => { setEntityType(e.target.value); setPage(1) }}>
             {ENTITY_TYPES.map((t) => <option key={t} value={t}>{t || 'All types'}</option>)}
           </select>
         </div>
         <div>
           <label className="label" htmlFor="al-action">Action</label>
-          <select id="al-action" className="input w-36" value={action}
+          <select id="al-action" className="input w-full sm:w-36" value={action}
             onChange={(e) => { setAction(e.target.value); setPage(1) }}>
             {ACTIONS.map((a) => <option key={a} value={a}>{a || 'All actions'}</option>)}
           </select>
         </div>
         <div>
           <label className="label" htmlFor="al-since">From</label>
-          <input id="al-since" type="date" className="input w-40" value={since}
+          <input id="al-since" type="date" className="input w-full sm:w-40" value={since}
             onChange={(e) => { setSince(e.target.value); setPage(1) }} />
         </div>
         <div>
           <label className="label" htmlFor="al-until">To</label>
-          <input id="al-until" type="date" className="input w-40" value={until}
+          <input id="al-until" type="date" className="input w-full sm:w-40" value={until}
             onChange={(e) => { setUntil(e.target.value); setPage(1) }} />
         </div>
         {hasFilters && (
@@ -92,6 +92,7 @@ export default function ActivityLog() {
         ) : items.length === 0 ? (
           <EmptyState icon="📋" title="No activity found" message="Try adjusting your filters." />
         ) : (
+          <div className="overflow-x-auto">
           <table className="w-full text-sm" aria-label="Activity log">
             <thead className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide border-b border-gray-200">
               <tr>
@@ -141,6 +142,7 @@ export default function ActivityLog() {
               })}
             </tbody>
           </table>
+          </div>
         )}
         <div className="px-4">
           <Pagination page={page} pages={pages} total={total} onPage={setPage} />

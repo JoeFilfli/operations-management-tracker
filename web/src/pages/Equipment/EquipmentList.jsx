@@ -60,22 +60,22 @@ export default function EquipmentList() {
   }
 
   return (
-    <div className="p-8 max-w-6xl">
+    <div className="p-4 sm:p-8 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Equipment</h1>
         {canWrite && <button className="btn-primary" onClick={() => setShowCreate(true)}>+ Add equipment</button>}
       </div>
 
       {/* Filters */}
-      <div className="flex gap-3 mb-4">
+      <div className="flex flex-wrap gap-3 mb-4">
         <input
           type="text"
           placeholder="Search name, asset tag…"
-          className="input max-w-xs"
+          className="input w-full sm:max-w-xs"
           value={q}
           onChange={(e) => { setQ(e.target.value); setPage(1) }}
         />
-        <select className="input w-44" value={status} onChange={(e) => { setStatus(e.target.value); setPage(1) }}>
+        <select className="input w-full sm:w-44" value={status} onChange={(e) => { setStatus(e.target.value); setPage(1) }}>
           {STATUSES.map((s) => <option key={s} value={s}>{s ? s.replace(/_/g, ' ') : 'All statuses'}</option>)}
         </select>
       </div>
@@ -87,6 +87,7 @@ export default function EquipmentList() {
         ) : items.length === 0 ? (
           <EmptyState icon="⚙️" title="No equipment found" message="Try adjusting your filters, or add new equipment." action={canWrite && <button className="btn-primary" onClick={() => setShowCreate(true)}>+ Add equipment</button>} />
         ) : (
+          <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide border-b border-gray-200">
               <tr>
@@ -115,6 +116,7 @@ export default function EquipmentList() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
         <div className="px-4"><Pagination page={page} pages={pages} total={total} onPage={setPage} /></div>
       </div>

@@ -47,7 +47,7 @@ export default function TicketList() {
   }
 
   return (
-    <div className="p-8 max-w-6xl">
+    <div className="p-4 sm:p-8 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Tickets</h1>
         <button className="btn-primary" onClick={() => setShowCreate(true)}>+ New ticket</button>
@@ -71,6 +71,7 @@ export default function TicketList() {
         {loading ? <p className="px-5 py-4 text-sm text-gray-400">Loading…</p>
           : items.length === 0 ? <EmptyState icon="🔧" title="No tickets found" message="Try adjusting your filters, or create a new ticket." action={<button className="btn-primary" onClick={() => setShowCreate(true)}>+ New ticket</button>} />
           : (
+          <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide border-b border-gray-200">
               <tr>
@@ -97,6 +98,7 @@ export default function TicketList() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
         <div className="px-4"><Pagination page={page} pages={pages} total={total} onPage={setPage} /></div>
       </div>
