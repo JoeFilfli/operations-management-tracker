@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from flask import abort, request
 from flask_restful import Resource
@@ -141,7 +141,7 @@ class TicketResource(Resource):
         if "status" in data:
             new_status = TicketStatus(data["status"])
             if new_status == TicketStatus.RESOLVED and ticket.status != TicketStatus.RESOLVED:
-                ticket.resolved_at = datetime.now(tz=timezone.utc)
+                ticket.resolved_at = datetime.now(tz=UTC)
             elif new_status != TicketStatus.RESOLVED and ticket.status == TicketStatus.RESOLVED:
                 ticket.resolved_at = None
             ticket.status = new_status

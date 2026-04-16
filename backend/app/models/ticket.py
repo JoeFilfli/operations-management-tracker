@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from sqlalchemy import DateTime, Enum as SAEnum, ForeignKey, String, UniqueConstraint
+from sqlalchemy import DateTime, ForeignKey, String, UniqueConstraint
+from sqlalchemy import Enum as SAEnum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..extensions import db
@@ -30,16 +31,16 @@ class MaintenanceTicket(TimestampMixin, db.Model):
     equipment_id: Mapped[int] = mapped_column(
         ForeignKey("equipment.id", ondelete="CASCADE"), nullable=False, index=True
     )
-    equipment: Mapped["Equipment"] = relationship(back_populates="tickets")  # type: ignore[name-defined]  # noqa: F821
+    equipment: Mapped[Equipment] = relationship(back_populates="tickets")  # type: ignore[name-defined]  # noqa: F821
 
     reporter_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"))
-    reporter: Mapped["User | None"] = relationship(  # type: ignore[name-defined]  # noqa: F821
+    reporter: Mapped[User | None] = relationship(  # type: ignore[name-defined]  # noqa: F821
         back_populates="reported_tickets", foreign_keys=[reporter_id]
     )
 
     resolved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
-    assignments: Mapped[list["TicketAssignment"]] = relationship(
+    assignments: Mapped[list[TicketAssignment]] = relationship(
         back_populates="ticket", cascade="all, delete-orphan"
     )
 
@@ -56,5 +57,5 @@ class TicketAssignment(TimestampMixin, db.Model):
         ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
 
-    ticket: Mapped["MaintenanceTicket"] = relationship(back_populates="assignments")
-    user: Mapped["User"] = relationship(back_populates="ticket_assignments")  # type: ignore[name-defined]  # noqa: F821
+    ticket: Mapped[MaintenanceTicket] = relationship(back_populates="assignments")
+    user: Mapped[User] = relationship(back_populates="ticket_assignments")  # type: ignore[name-defined]  # noqa: F821

@@ -4,7 +4,6 @@ from marshmallow import Schema, fields, validate
 
 from ..models.enums import EquipmentStatus
 
-
 _STATUS_VALUES = [s.value for s in EquipmentStatus]
 
 

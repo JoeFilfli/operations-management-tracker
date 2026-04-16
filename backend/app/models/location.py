@@ -14,7 +14,7 @@ class Location(TimestampMixin, db.Model):
     name: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     description: Mapped[str | None] = mapped_column(String(500))
 
-    equipment: Mapped[list["Equipment"]] = relationship(  # type: ignore[name-defined]  # noqa: F821
+    equipment: Mapped[list[Equipment]] = relationship(  # type: ignore[name-defined]  # noqa: F821
         back_populates="location"
     )
 

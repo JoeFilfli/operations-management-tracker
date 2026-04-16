@@ -19,7 +19,7 @@ class ActivityLog(TimestampMixin, db.Model):
     )
     payload: Mapped[dict | None] = mapped_column(JSON)
 
-    actor: Mapped["User | None"] = relationship(foreign_keys=[actor_id])  # type: ignore[name-defined]  # noqa: F821
+    actor: Mapped[User | None] = relationship(foreign_keys=[actor_id])  # type: ignore[name-defined]  # noqa: F821
 
     def __repr__(self) -> str:  # pragma: no cover
         return f"<ActivityLog {self.entity_type}#{self.entity_id} {self.action}>"

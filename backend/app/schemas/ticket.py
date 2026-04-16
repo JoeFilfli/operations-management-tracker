@@ -4,7 +4,6 @@ from marshmallow import Schema, fields, validate
 
 from ..models.enums import TicketPriority, TicketStatus
 
-
 _STATUS_VALUES = [s.value for s in TicketStatus]
 _PRIORITY_VALUES = [p.value for p in TicketPriority]
 

@@ -26,9 +26,9 @@ class Equipment(TimestampMixin, db.Model):
     )
 
     location_id: Mapped[int | None] = mapped_column(ForeignKey("locations.id", ondelete="SET NULL"))
-    location: Mapped["Location | None"] = relationship(back_populates="equipment")  # type: ignore[name-defined]  # noqa: F821
+    location: Mapped[Location | None] = relationship(back_populates="equipment")  # type: ignore[name-defined]  # noqa: F821
 
-    tickets: Mapped[list["MaintenanceTicket"]] = relationship(  # type: ignore[name-defined]  # noqa: F821
+    tickets: Mapped[list[MaintenanceTicket]] = relationship(  # type: ignore[name-defined]  # noqa: F821
         back_populates="equipment", cascade="all, delete-orphan"
     )
 

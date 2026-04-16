@@ -22,10 +22,10 @@ class User(TimestampMixin, db.Model):
     )
     is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
 
-    ticket_assignments: Mapped[list["TicketAssignment"]] = relationship(  # type: ignore[name-defined]  # noqa: F821
+    ticket_assignments: Mapped[list[TicketAssignment]] = relationship(  # type: ignore[name-defined]  # noqa: F821
         back_populates="user", cascade="all, delete-orphan"
     )
-    reported_tickets: Mapped[list["MaintenanceTicket"]] = relationship(  # type: ignore[name-defined]  # noqa: F821
+    reported_tickets: Mapped[list[MaintenanceTicket]] = relationship(  # type: ignore[name-defined]  # noqa: F821
         back_populates="reporter", foreign_keys="MaintenanceTicket.reporter_id"
     )
 
