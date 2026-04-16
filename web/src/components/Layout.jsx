@@ -10,6 +10,18 @@ const NAV = [
   { to: '/activity',  label: 'Activity Log', icon: '📋', roles: ['admin'] },
 ]
 
+function LogoMark() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M16 2.5L28 9L28 23L16 29.5L4 23L4 9Z" fill="#111d2e" stroke="#3b6ef0" strokeWidth="1.5"/>
+      <circle cx="16" cy="16" r="5" stroke="#3b6ef0" strokeWidth="1" strokeOpacity="0.4"/>
+      <circle cx="16" cy="16" r="2.5" fill="#3b6ef0"/>
+      <line x1="16" y1="4.5"  x2="16" y2="8"    stroke="#3b6ef0" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="16" y1="24"   x2="16" y2="27.5"  stroke="#3b6ef0" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  )
+}
+
 export default function Layout() {
   const { user, signOut } = useAuth()
   const navigate = useNavigate()
@@ -31,7 +43,7 @@ export default function Layout() {
       <nav aria-label="Primary navigation" className="w-56 flex-shrink-0 bg-gray-900 text-gray-100 flex flex-col">
         <div className="px-4 py-5 border-b border-gray-700">
           <Link to="/" className="flex items-center gap-2" aria-label="OpsTrack home">
-            <span className="w-7 h-7 rounded bg-brand-600 flex items-center justify-center text-white font-bold text-sm" aria-hidden="true">O</span>
+            <LogoMark />
             <span className="font-bold text-white">OpsTrack</span>
           </Link>
         </div>
