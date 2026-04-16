@@ -18,10 +18,16 @@ RUN npm run build
 FROM nginx:1.27-alpine
 
 COPY --from=builder /app/dist /usr/share/nginx/html
-# Store as template; envsubst fills in $PORT at container startup
-COPY nginx.conf /etc/nginx/conf.d/default.conf.template
 
+# nginx:alpine has built-in envsubst-on-templates support:
+#   files in /etc/nginx/templates/*.template are processed at startup
+#   and written to /etc/nginx/conf.d/ (stripping the .template suffix).
+# This substitutes ${PORT} with Railway's injected $PORT value.
+COPY nginx.conf /etc/nginx/templates/default.conf.template
+
+# Remove the default server config so it doesn't conflict with ours
+RUN rm -f /etc/nginx/conf.d/default.conf
+
+# Railway will inject $PORT; default to 80 for local docker runs
+ENV PORT=80
 EXPOSE 80
-
-# Railway injects $PORT; substitute it into the config then start nginx
-CMD ["/bin/sh", "-c", "envsubst '${PORT}' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
