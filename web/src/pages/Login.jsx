@@ -43,7 +43,15 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-600 text-white text-xl font-bold mb-3">O</div>
+          <div className="inline-flex mb-3">
+            <svg width="48" height="48" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M16 2.5L28 9L28 23L16 29.5L4 23L4 9Z" fill="#111d2e" stroke="#3b6ef0" strokeWidth="1.5"/>
+              <circle cx="16" cy="16" r="5" stroke="#3b6ef0" strokeWidth="1" strokeOpacity="0.4"/>
+              <circle cx="16" cy="16" r="2.5" fill="#3b6ef0"/>
+              <line x1="16" y1="4.5"  x2="16" y2="8"    stroke="#3b6ef0" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="16" y1="24"   x2="16" y2="27.5"  stroke="#3b6ef0" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          </div>
           <h1 className="text-2xl font-bold text-gray-900">OpsTrack</h1>
           <p className="text-sm text-gray-500 mt-1">Equipment & Operations Management</p>
         </div>
