@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { login } from '../api/auth'
 import { useAuth } from '../context/AuthContext'
 
+const DEMO_EMAIL = 'admin@opstrack.local'
+const DEMO_PASSWORD = 'password123'
+
 export default function Login() {
   const { signIn } = useAuth()
   const navigate = useNavigate()
@@ -10,12 +13,11 @@ export default function Login() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const signInWith = async (email, password) => {
     setError('')
     setLoading(true)
     try {
-      const data = await login(form.email, form.password)
+      const data = await login(email, password)
       signIn({ access_token: data.access_token, refresh_token: data.refresh_token }, data.user)
       navigate('/', { replace: true })
     } catch (err) {
@@ -25,6 +27,16 @@ export default function Login() {
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await signInWith(form.email, form.password)
+  }
+
+  const handleDemoSignIn = async () => {
+    setForm({ email: DEMO_EMAIL, password: DEMO_PASSWORD })
+    await signInWith(DEMO_EMAIL, DEMO_PASSWORD)
   }
 
   return (
@@ -72,6 +84,20 @@ export default function Login() {
               {loading ? 'Signing in…' : 'Sign in'}
             </button>
           </form>
+
+          <div className="mt-4 pt-4 border-t border-gray-200">
+            <button
+              type="button"
+              onClick={handleDemoSignIn}
+              disabled={loading}
+              className="btn-secondary w-full justify-center"
+            >
+              Sign in with demo account
+            </button>
+            <p className="mt-2 text-xs text-gray-500 text-center">
+              Explore OpsTrack with a pre-seeded admin account.
+            </p>
+          </div>
         </div>
       </div>
     </div>
